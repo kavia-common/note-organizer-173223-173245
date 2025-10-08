@@ -1,0 +1,22 @@
+<nav class="nav-wrap" role="navigation" aria-label="Top Navigation">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">🌊</span>
+    <span class="title">Ocean Notes</span>
+  </div>
+
+  <div class="actions">
+    <div class="search">
+      <input
+        class="input"
+        aria-label="Search notes"
+        type="search"
+        placeholder="Search notes..."
+        [(ngModel)]="query"
+        (keyup.enter)="onSearch()"
+      />
+    </div>
+    <button class="btn btn-primary" (click)="onCreate()" aria-label="Create new note">
+      + New Note
+    </button>
+  </div>
+</nav>

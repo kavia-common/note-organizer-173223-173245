@@ -1,0 +1,12 @@
+.main-grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 960px) {
+  .main-grid {
+    grid-template-columns: 360px 1fr;
+    grid-template-rows: 1fr;
+  }
+}

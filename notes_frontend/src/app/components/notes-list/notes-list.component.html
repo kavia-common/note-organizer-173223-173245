@@ -1,0 +1,22 @@
+<section class="notes-list card" aria-label="Notes list">
+  <div class="header">
+    <h2>Notes</h2>
+    <span class="count">{{ notes.length }}</span>
+  </div>
+  <ul>
+    <li *ngFor="let n of notes; trackBy: trackById">
+      <button
+        class="note-item"
+        [class.active]="activeId === n.id"
+        (click)="onSelect(n.id)"
+        [attr.aria-label]="'Open note ' + n.title"
+      >
+        <div class="title-row">
+          <h4 class="title">{{ n.title || 'Untitled' }}</h4>
+          <button type="button" class="small danger" (click)="onDelete(n.id, $event)" aria-label="Delete note">Delete</button>
+        </div>
+        <p class="meta">{{ n.updatedAt | date:'medium' }}</p>
+      </button>
+    </li>
+  </ul>
+</section>

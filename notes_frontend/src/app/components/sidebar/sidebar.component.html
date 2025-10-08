@@ -1,0 +1,56 @@
+<aside class="sidebar card" aria-label="Sidebar with folders and tags">
+  <div class="section">
+    <h3>Folders</h3>
+    <ul>
+      <li>
+        <button
+          class="link-btn"
+          [class.active]="!activeFolderId"
+          (click)="selectFolder(undefined)"
+          aria-label="Show all folders"
+        >
+          All
+        </button>
+      </li>
+      <li *ngFor="let f of folders">
+        <button
+          class="link-btn"
+          [class.active]="activeFolderId === f.id"
+          (click)="selectFolder(f.id)"
+          [attr.aria-label]="'Filter by folder ' + f.name"
+        >
+          {{ f.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Tags</h3>
+    <ul class="tags">
+      <li>
+        <button
+          class="badge link-btn"
+          [class.active]="!activeTagId"
+          (click)="selectTag(undefined)"
+          aria-label="Show all tags"
+        >
+          All
+        </button>
+      </li>
+      <li *ngFor="let t of tags">
+        <button
+          class="badge link-btn"
+          [style.borderColor]="t.color || '#e5e7eb'"
+          [style.background]="t.color ? t.color + '20' : ''"
+          [class.active]="activeTagId === t.id"
+          (click)="selectTag(t.id)"
+          [attr.aria-label]="'Filter by tag ' + t.name"
+        >
+          <span class="dot" [style.background]="t.color || '#6b7280'"></span>
+          {{ t.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</aside>

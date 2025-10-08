@@ -1,0 +1,31 @@
+<div class="app-content">
+  <app-sidebar
+    [folders]="folders"
+    [tags]="tags"
+    [activeFolderId]="activeFolderId"
+    [activeTagId]="activeTagId"
+    (folderSelected)="onFolderSelected($event)"
+    (tagSelected)="onTagSelected($event)"
+  ></app-sidebar>
+
+  <div class="main-grid">
+    <app-notes-list
+      [notes]="notes"
+      [activeId]="selectedNote?.id || null"
+      (select)="onSelectNote($event)"
+      (delete)="onDeleteNote($event)"
+    ></app-notes-list>
+
+    <app-note-editor
+      [note]="selectedNote"
+      [folders]="folders"
+      [tags]="tags"
+      (save)="onSaveNote($event)"
+      (delete)="onDeleteNote($event)"
+    ></app-note-editor>
+  </div>
+</div>
+
+<!-- Navbar outputs handled here via host listener when included in root; route-level search/create delegated through events from root navbar using router-outlet context is not directly emitted to this page.
+     To connect navbar to page actions, we also listen in the root via output bindings in app.component.html if desired.
+-->

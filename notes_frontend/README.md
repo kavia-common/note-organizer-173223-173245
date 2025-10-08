@@ -1,59 +1,39 @@
-# Angular
+# Ocean Notes - Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+This Angular app implements a notes UI with CRUD using an in-memory store (localStorage persisted) and follows the Ocean Professional theme.
 
-## Development server
+Key features:
+- Top navbar: app title, global search, New Note button
+- Sidebar: Folders and Tags
+- Main area: Notes list and Editor
+- Routes: /notes, /notes/:id (default redirect to /notes)
+- Responsive, accessible, modern styling
 
-To start a local development server, run:
+Getting started:
+1) Install dependencies:
+   npm install
 
-```bash
-ng serve
-```
+2) Start dev server:
+   npm start
+   Open http://localhost:3000
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3) Build for production:
+   npm run build
 
-## Code scaffolding
+Structure overview:
+- src/app/core/models/*: Interfaces (Note, Folder, Tag)
+- src/app/core/services/notes-api.service.ts: REST abstraction (in-memory/localStorage)
+- src/app/core/services/notes-state.service.ts: Search/filter/selection coordination with RxJS
+- src/app/components/*: Navbar, Sidebar, NotesList, NoteEditor
+- src/app/pages/notes/*: Page composition and routing
+- src/app/app.routes.ts: Route definitions
+- src/styles.css: Global theme variables (Ocean Professional)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Swapping to a real backend:
+- Replace NotesApiService methods with HttpClient calls to your REST API.
+- Keep method signatures identical for easy replacement.
+- Optionally use environment.ts for a BASE_URL. If not provided, default to in-memory store.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Tests:
+- Basic spec stubs for services are included. Run:
+  npm test

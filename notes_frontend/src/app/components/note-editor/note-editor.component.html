@@ -1,0 +1,51 @@
+<section class="editor card" *ngIf="draft; else empty" aria-label="Note editor">
+  <div class="toolbar">
+    <input
+      class="input title"
+      type="text"
+      placeholder="Note title"
+      [(ngModel)]="draft!.title"
+      aria-label="Note title"
+    />
+    <div class="toolbar-actions">
+      <button class="btn btn-secondary" (click)="onDelete()" aria-label="Delete note">Delete</button>
+      <button class="btn btn-primary" (click)="onSave()" aria-label="Save note">Save</button>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <label class="sr-only" for="folderSelect">Folder</label>
+    <select id="folderSelect" class="select" [(ngModel)]="draft!.folderId" aria-label="Select folder">
+      <option [ngValue]="null">No folder</option>
+      <option *ngFor="let f of folders" [ngValue]="f.id">{{ f.name }}</option>
+    </select>
+
+    <div class="tags">
+      <span class="badge"
+            *ngFor="let t of tags"
+            [style.borderColor]="t.color || '#e5e7eb'"
+            [style.background]="isTagActive(t.id) ? (t.color ? t.color + '30' : '#eef2ff') : '#f8fafc'"
+            (click)="toggleTag(t.id)"
+            role="button"
+            tabindex="0"
+            [attr.aria-pressed]="isTagActive(t.id)"
+      >
+        <span class="dot" [style.background]="t.color || '#6b7280'"></span>
+        {{ t.name }}
+      </span>
+    </div>
+  </div>
+
+  <textarea
+    class="textarea"
+    placeholder="Write your note here... Markdown or plain text."
+    [(ngModel)]="draft!.content"
+    aria-label="Note content"
+  ></textarea>
+</section>
+
+<ng-template #empty>
+  <section class="editor card empty">
+    <p>Select or create a note to begin.</p>
+  </section>
+</ng-template>
